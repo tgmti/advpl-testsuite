@@ -25,11 +25,11 @@ Static Function FormatString( cInput, aValues )
 	Return cResult
 
 /**
- * @class Logger
+ * @class LoggerNG
  * @author Marcelo Camargo
  * @since 02/2018
  **/
-Class Logger
+Class LoggerNG
 	Data Context As Character
 	Data Handler As Number
 
@@ -43,11 +43,11 @@ Class Logger
 	Method Success( cMessage, aValues )
 EndClass
 
-Method New( cContext ) Class Logger
+Method New( cContext ) Class LoggerNG
 	::Context := cContext
 	Return ::Start()
 
-Method Start() Class Logger
+Method Start() Class LoggerNG
 	Local cSep := If( isSrvUnix(), '/', '\' )
 	Local cOutDir := CurDir() + cSep + 'logs'
 	Local cOutFile := cOutDir + cSep + ::Context + '.log'
@@ -63,7 +63,7 @@ Method Start() Class Logger
 	EndIf
 	Return Self
 
-Method LogToFile( cKind, cText ) Class Logger
+Method LogToFile( cKind, cText ) Class LoggerNG
 	Local cLine := DToC( Date() ) + ' ' + Time() + ' | '
 	cLine += Padr( '[' + cKind + ']', 11, ' ' ) + ' | '
 	cLine += cText + Chr( 13 ) + Chr( 10 )
@@ -71,27 +71,27 @@ Method LogToFile( cKind, cText ) Class Logger
 	FWrite( ::Handler, cLine, Len( cLine ) )
 	Return Self
 
-Method Log( cMessage, aValues ) Class Logger
+Method Log( cMessage, aValues ) Class LoggerNG
 	Local cText := FormatString( cMessage, aValues )
 	ConOut( Now() + ' [LOG]     ' + ANSI_LIGHT_GRAY + cText + ANSI_END )
 	Return ::LogToFile( 'LOG', cText )
 
-Method Info( cMessage, aValues ) Class Logger
+Method Info( cMessage, aValues ) Class LoggerNG
 	Local cText := FormatString( cMessage, aValues )
 	ConOut( Now() + ' [INFO]    ' + ANSI_CYAN + cText + ANSI_END )
 	Return ::LogToFile( 'INFO', cText )
 
-Method Error( cMessage, aValues ) Class Logger
+Method Error( cMessage, aValues ) Class LoggerNG
 	Local cText := FormatString( cMessage, aValues )
 	ConOut( Now() + ' [ERROR]   ' + ANSI_LIGHT_RED + cText + ANSI_END )
 	Return ::LogToFile( 'ERROR', cText )
 
-Method Warn( cMessage, aValues ) Class Logger
+Method Warn( cMessage, aValues ) Class LoggerNG
 	Local cText := FormatString( cMessage, aValues )
 	ConOut( Now() + ' [WARN]    ' + ANSI_LIGHT_YELLOW + cText + ANSI_END )
 	Return ::LogToFile( 'WARN', cText )
 
-Method Success( cMessage, aValues ) Class Logger
+Method Success( cMessage, aValues ) Class LoggerNG
 	Local cText := FormatString( cMessage, aValues )
 	ConOut( Now() + ' [SUCCESS] ' + ANSI_LIGHT_GREEN + cText + ANSI_END )
 	Return ::LogToFile( 'SUCCESS', cText )

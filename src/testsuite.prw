@@ -323,7 +323,7 @@ Method Run( oTester ) Class TestSuite
     ConOut( ANSI_SET_TITLE + '[' + ::cName + '] AdvPL Test Suite' + ANSI_BEL )
     ConOut( ANSI_CLEAR_SCREEN + ANSI_MOVE_CURSOR_TO_HOME )
 
-    ::oLogger := Logger():New( ::cName )
+    ::oLogger := LoggerNG():New( ::cName )
     ::oLogger:Info( '[{1}] AdvPL Test Suite v0.1', { ::cName } )
     ::oLogger:Log( '> {1}, {2} feature(s)' + ANSI_SAVE, { ::cDescription, Len( aFeatures ) } )
 
